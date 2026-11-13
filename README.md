@@ -71,9 +71,8 @@ addresses and a map of what is exposed where.
   statistics scripts used to measure changes. Names, addresses and secrets are replaced with
   placeholders (`USER`, `BUCKET`, `ROUTER_IP`).
 
-## What this shows
+## What is published
 
-Operating real services as one person: choosing boring defaults, measuring before
-changing, making failures visible, and leaving documentation that someone else could
-rebuild the system from. The full configuration, including the recovery guide, is private;
-I'm happy to walk through it in an interview.
+Everything here is real, with names, addresses and secrets replaced. The full configuration
+(Compose files, Access policies, the recovery guide) stays private because it maps what is
+exposed where.
