@@ -1,0 +1,5 @@
+# BFQ on the SMR system disk only. Reads for interactive work keep getting turns
+# while a backup or an import writes, instead of queueing behind them. The USB
+# SSD keeps mq-deadline. Matched on the sysfs model rather than ID_MODEL: udev
+# only sets ID_MODEL in 60-persistent-storage.rules.
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTRS{model}=="ST1000LM035*", ATTR{queue/scheduler}="bfq"

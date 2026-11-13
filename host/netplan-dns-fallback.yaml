@@ -1,0 +1,31 @@
+# Backup name servers for enp11s0, installed as
+# /etc/netplan/98-dns-fallback.yaml (mode 600, root:root).
+#
+# The router (ROUTER_IP) stays the first name server: DHCP hands it out and
+# systemd-resolved asks it first, so LAN names in the "home" domain keep
+# working. These two are only used when the router stops answering, which it
+# did on 2026-09-16 during one morning hour: cloudflared logged 120
+# "server misbehaving" errors, tailscaled 21 and Backrest 29, and the first
+# off-site upload to Cloudflare R2 died after 3.5 hours.
+#
+# Cloudflare first because the tunnel already depends on Cloudflare, Quad9
+# second so a Cloudflare outage is covered by a different operator.
+#
+# The list is written out in full, with DHCP's own name server offer ignored
+# (`use-dns: false`), because systemd-networkd puts statically configured
+# servers before the ones DHCP hands out: without this the router would drop
+# to third place and every lookup would leave the house. The router's address
+# is its LAN gateway address and has not changed; if it ever does, name
+# resolution keeps working through the two public servers.
+#
+# Netplan merges this with the other netplan files (DHCP and a static
+# address); it adds name servers and changes nothing else. Applying needs `netplan generate` plus a reboot, or `resolvectl dns`
+# for the running system: see the host notes.
+network:
+  version: 2
+  ethernets:
+    enp11s0:
+      nameservers:
+        addresses: [ROUTER_IP, 1.1.1.1, 9.9.9.9]
+      dhcp4-overrides:
+        use-dns: false

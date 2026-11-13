@@ -7,6 +7,8 @@ the architecture, the rules I operate by, and the incidents that taught me those
 The real configuration repository is private, because it holds hostnames, network
 addresses and a map of what is exposed where.
 
+![Architecture diagram](docs/architecture.svg)
+
 ## At a glance
 
 | | |
@@ -57,10 +59,17 @@ addresses and a map of what is exposed where.
 
 ## Read next
 
-- [`docs/lessons.md`](docs/lessons.md): five incidents, each with what was seen, the cause,
-  the fix and the guard.
-- [`docs/security-model.md`](docs/security-model.md): how access is layered and how a
-  read-only personal-data tool for an AI assistant is exposed without opening a port.
+- [`docs/lessons.md`](docs/lessons.md): ten incidents, each with what was seen, the cause, the
+  fix and the guard.
+- [`docs/decisions.md`](docs/decisions.md): why it is built this way, and what lost.
+- [`docs/security-model.md`](docs/security-model.md): how access is layered, and how a read-only
+  personal-data tool for an AI assistant is exposed without opening a port.
+- [`docs/agent-rules.md`](docs/agent-rules.md): the rulebook I give AI agents that work on this
+  system, and the measuring method behind every performance claim.
+- [`host/`](host): real, sanitized host scripts and configs: the backup watcher, the temperature
+  watchdog, SSH hardening, the DNS fallback, memory and disk tuning, and the sampling and
+  statistics scripts used to measure changes. Names, addresses and secrets are replaced with
+  placeholders (`USER`, `BUCKET`, `ROUTER_IP`).
 
 ## What this shows
 
